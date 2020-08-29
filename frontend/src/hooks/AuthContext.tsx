@@ -62,7 +62,7 @@ function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within an Authprovider');
+    throw new Error('userAuth must be used within an Authprovider');
   }
 
   return context;
