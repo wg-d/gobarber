@@ -24,6 +24,7 @@
         "prettier"
     ],
     "rules": {
+      "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always"}],
       "class-methos-use-this": "off",
       "prettier/prettier": "error",
       "import/extensions": [
