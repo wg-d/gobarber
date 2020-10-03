@@ -1,5 +1,5 @@
-import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { injectable, inject } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import iUsersRepository from '../repositories/iUsersRepository';
@@ -10,14 +10,17 @@ interface Request {
   password: string;
 }
 
+@injectable()
 class CreateUserService {
-  constructor( private usersRepository: iUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: iUsersRepository,
+  ) {}
 
-  public async execute({ name, email, password}: Request): Promise<User> {
-
+  public async execute({ name, email, password }: Request): Promise<User> {
     // cannot create user with duplicated email
     const checkUserExists = await this.usersRepository.findByEmail(email);
-    if(checkUserExists) {
+    if (checkUserExists) {
       throw new AppError('Email address already used');
     }
 
@@ -26,7 +29,7 @@ class CreateUserService {
     const user = await this.usersRepository.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     return user;
