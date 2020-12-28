@@ -5,7 +5,9 @@
     "extends": [
         "plugin:react/recommended",
         "airbnb",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -23,7 +25,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "react-hooks"
+        "react-hooks",
+        "prettier"
     ],
     "rules": {
         "no-use-before-define": "off",
@@ -39,7 +42,8 @@
               "ts": "never",
               "tsx": "never"
             }
-        ]
+        ],
+        "prettier/prettier": "error"
     },
     "settings": {
         "import/resolver": {
